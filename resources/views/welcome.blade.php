@@ -53,11 +53,11 @@
             <p>بالامكان الضغط على اي مكان في الصورة لتحديد مكان الاسم</p>
             <div class="col-md-6 mb-3">
                 <label for="textX" class="form-label">موضع النص X:</label>
-                <input type="number" name="text_x" id="textX" class="form-control" min="0" value="10" required>
+                <input type="text" name="text_x" id="textX" class="form-control" min="0" value="10" required>
             </div>
             <div class="col-md-6 mb-3">
                 <label for="textY" class="form-label">موضع النص Y:</label>
-                <input type="number" name="text_y" id="textY" class="form-control" min="0" value="10" required>
+                <input type="text" name="text_y" id="textY" class="form-control" min="0" value="10" required>
             </div>
         </div>
         <div class="row">
@@ -153,8 +153,8 @@
         const x = (e.clientX - canvasBounds.left) * scaleX;
         const y = (e.clientY - canvasBounds.top) * scaleY;
 
-        $('#textX').val(x);
-        $('#textY').val(y);
+        $('#textX').val(x.toFixed(2)); // round to 2 decimal places
+        $('#textY').val(y.toFixed(2)); // round to 2 decimal places
         draw();
     }
 
@@ -165,8 +165,8 @@
         const x = (e.touches[0].clientX - canvasBounds.left) * scaleX;
         const y = (e.touches[0].clientY - canvasBounds.top) * scaleY;
 
-        $('#textX').val(x);
-        $('#textY').val(y);
+        $('#textX').val(x.toFixed(2)); // round to 2 decimal places
+        $('#textY').val(y.toFixed(2)); // round to 2 decimal places
         draw();
     }
 
