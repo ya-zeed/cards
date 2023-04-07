@@ -43,7 +43,7 @@
 
         <div class="mb-3">
             <label for="image" class="form-label">تحميل الصورة:</label>
-            <input type="file" name="image" id="image" class="form-control" accept="image/*" required>
+            <input type="file" name="image" id="image" class="form-control" accept="image/*" required max="2M">
         </div>
         <div class="mb-3">
             <label for="font" class="form-label">تحميل الخط: (اختياري)</label>
@@ -126,7 +126,7 @@
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-        const text = 'يزيد الطويل';
+        const text = 'يزيد فهد الطويل';
         const fontSize = parseInt($('#fontSize').val(), 10);
         const fontColor = $('#fontColor').val();
         const textX = parseInt($('#textX').val(), 10);
