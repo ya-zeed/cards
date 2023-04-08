@@ -115,22 +115,35 @@
     });
 
     $('input[type=number], input[type=color]').on('input', draw);
+    // Draw default preview
+    img.src = 'https://via.placeholder.com/400x200';
+
+    // Helper function to calculate new image dimensions
+    function fitImageOnCanvas(image, maxWidth, maxHeight) {
+        const ratio = Math.min(maxWidth / image.width, maxHeight / image.height);
+        return { width: image.width * ratio, height: image.height * ratio };
+    }
 
     function draw() {
         if (!img.src) return;
         if (!fontUrl) fontUrl = defaultFontUrl;
 
-        canvas.width = img.width;
-        canvas.height = img.height;
+        const newDimensions = fitImageOnCanvas(img, window.innerWidth, window.innerHeight);
+        const scaleX = newDimensions.width / img.width;
+        const scaleY = newDimensions.height / img.height;
+        const scale = Math.min(scaleX, scaleY);
+
+        canvas.width = newDimensions.width;
+        canvas.height = newDimensions.height;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
         const text = 'يزيد فهد الطويل';
-        const fontSize = parseInt($('#fontSize').val(), 10);
+        const fontSize = parseInt($('#fontSize').val(), 10) * scale;
         const fontColor = $('#fontColor').val();
-        const textX = parseInt($('#textX').val(), 10);
-        const textY = parseInt($('#textY').val(), 10);
+        const textX = parseInt($('#textX').val(), 10) * scaleX;
+        const textY = parseInt($('#textY').val(), 10) * scaleY;
 
         const fontFace = new FontFace("customFont", `url(${fontUrl})`);
 
@@ -143,13 +156,10 @@
         });
     }
 
-    // Draw default preview
-    img.src = 'https://via.placeholder.com/400x200';
-
     function updateMousePosition(e) {
         const canvasBounds = canvas.getBoundingClientRect();
-        const scaleX = canvas.width / canvasBounds.width;
-        const scaleY = canvas.height / canvasBounds.height;
+        const scaleX = img.width / canvasBounds.width;
+        const scaleY = img.height / canvasBounds.height;
         const x = (e.clientX - canvasBounds.left) * scaleX;
         const y = (e.clientY - canvasBounds.top) * scaleY;
 
@@ -160,8 +170,8 @@
 
     function updateTouchPosition(e) {
         const canvasBounds = canvas.getBoundingClientRect();
-        const scaleX = canvas.width / canvasBounds.width;
-        const scaleY = canvas.height / canvasBounds.height;
+        const scaleX = img.width / canvasBounds.width;
+        const scaleY = img.height / canvasBounds.height;
         const x = (e.touches[0].clientX - canvasBounds.left) * scaleX;
         const y = (e.touches[0].clientY - canvasBounds.top) * scaleY;
 
@@ -169,6 +179,8 @@
         $('#textY').val(y.toFixed(2)); // round to 2 decimal places
         draw();
     }
+
+
 
 
     let isDragging = false;

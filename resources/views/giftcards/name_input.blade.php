@@ -112,6 +112,8 @@
         const ctx = canvas.getContext('2d');
         const img = new Image();
         img.src = '{{ asset("storage/") }}/' + {!! json_encode($images) !!}[selectedIndex].image_path;
+        console.log("Image URL:", img.src); // Add this line to check the image URL
+
 
         img.onload = function () {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
