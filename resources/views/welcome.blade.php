@@ -70,7 +70,7 @@
                 <input type="color" name="font_color" id="fontColor" class="form-control" value="#000000" required>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">إنشاء بطاقة هدية</button>
+        <button type="submit" class="btn btn-primary">إنشاء البطاقة</button>
     </form>
 
     <h2 class="text-center mt-5">العرض:</h2>
