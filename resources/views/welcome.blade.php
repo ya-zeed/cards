@@ -34,7 +34,7 @@
             @if ($errors->has('route'))
                 <div class="alert alert-danger">{{ $errors->first('route') }}</div>
             @endif
-            <label for="route" class="form-label">النطاق:</label>
+            <label for="route" class="form-label">الرابط:</label>
             <div class="input-group mb-3" dir="ltr">
                 <span class="input-group-text">cards.yt.sa/card/</span>
                 <input type="text" name="route" id="route" class="form-control" required pattern="[a-zA-Z0-9]+">
