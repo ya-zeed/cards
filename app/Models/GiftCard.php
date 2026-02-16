@@ -13,5 +13,10 @@ class GiftCard extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeByRoute($query, $route)
+    {
+        return $query->where('route', $route);
+    }
 }
 
